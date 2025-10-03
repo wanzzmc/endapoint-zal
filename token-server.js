@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // 🔐 LIST TOKEN YANG VALID
 const VALID_TOKENS = [
-  '8222126932:AAE0LkpotffLHNFtVrVoqUM9cpU861uOKvU',
+  '8222126932:AAE0LkpotffLHNFtVrVoqUM9cpU86lu0KvU',
   '8332373171:AAGUIGrvbVR9wnAbD88bF_2ck2hUW9k1mBc'
 ];
 
