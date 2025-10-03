@@ -2,17 +2,17 @@
 const express = require('express');
 const app = express();
 
-// MIDDLEWARE
+// MIDDLEWARE WAJIB
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// 🔐 LIST TOKEN YANG DIIZINKAN
+// 🔐 LIST TOKEN YANG VALID
 const VALID_TOKENS = [
   '8222126932:AAE0LkpotffLHNFtVrVoqUM9cpU861uOKvU',
   '8332373171:AAGUIGrvbVR9wnAbD88bF_2ck2hUW9k1mBc'
 ];
 
-// 🏠 HOME PAGE - TEST
+// 🏠 HOME PAGE
 app.get('/', (req, res) => {
   res.json({ 
     status: 'Active',
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
   });
 });
 
-// 📌 ENDPOINT VALIDASI TOKEN
+// ✅ ENDPOINT VALIDASI TOKEN - PASTIKAN PATH NYA BENAR
 app.post('/validate-token', (req, res) => {
   try {
     console.log('📥 Received validation request');
@@ -33,21 +33,21 @@ app.post('/validate-token', (req, res) => {
       return res.json(false);
     }
     
-    // Cek apakah token valid
+    // Validasi token
     const isValid = VALID_TOKENS.includes(token);
     
-    console.log(`🔐 Token validation: ${isValid ? 'VALID' : 'INVALID'}`);
+    console.log(`🔐 Token validation result: ${isValid ? 'VALID' : 'INVALID'}`);
     
-    // ⚡ RETURN BOOLEAN
+    // ⚡ RETURN BOOLEAN LANGSUNG
     res.json(isValid);
     
   } catch (error) {
     console.error('❌ Server error:', error);
-    res.status(500).json(false);
+    res.json(false);
   }
 });
 
-// Handle 404
+// Handle 404 untuk route yang tidak ada
 app.use('*', (req, res) => {
   res.status(404).json({ 
     error: 'Endpoint not found',
